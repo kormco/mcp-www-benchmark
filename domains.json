@@ -1,0 +1,825 @@
+{
+  "description": "MCP Discovery Benchmark domain list",
+  "generated_seed": 42,
+  "categories": {
+    "A": "MCP-enabled domains (known _mcp TXT records)",
+    "B": "Popular domains (Tranco-style top list)",
+    "C": "Nonexistent domains (randomly generated)",
+    "D": "Slow/unreliable domains (uncommon TLDs)",
+    "E": "HTTPS-only sites (no MCP expected)"
+  },
+  "counts": {
+    "A": 1,
+    "B": 50,
+    "C": 50,
+    "D": 50,
+    "E": 50
+  },
+  "total": 201,
+  "domains": [
+    {
+      "domain": "korm.co",
+      "category": "A"
+    },
+    {
+      "domain": "google.com",
+      "category": "B"
+    },
+    {
+      "domain": "facebook.com",
+      "category": "B"
+    },
+    {
+      "domain": "amazon.com",
+      "category": "B"
+    },
+    {
+      "domain": "apple.com",
+      "category": "B"
+    },
+    {
+      "domain": "microsoft.com",
+      "category": "B"
+    },
+    {
+      "domain": "youtube.com",
+      "category": "B"
+    },
+    {
+      "domain": "twitter.com",
+      "category": "B"
+    },
+    {
+      "domain": "instagram.com",
+      "category": "B"
+    },
+    {
+      "domain": "linkedin.com",
+      "category": "B"
+    },
+    {
+      "domain": "reddit.com",
+      "category": "B"
+    },
+    {
+      "domain": "wikipedia.org",
+      "category": "B"
+    },
+    {
+      "domain": "netflix.com",
+      "category": "B"
+    },
+    {
+      "domain": "github.com",
+      "category": "B"
+    },
+    {
+      "domain": "stackoverflow.com",
+      "category": "B"
+    },
+    {
+      "domain": "cloudflare.com",
+      "category": "B"
+    },
+    {
+      "domain": "yahoo.com",
+      "category": "B"
+    },
+    {
+      "domain": "bing.com",
+      "category": "B"
+    },
+    {
+      "domain": "twitch.tv",
+      "category": "B"
+    },
+    {
+      "domain": "discord.com",
+      "category": "B"
+    },
+    {
+      "domain": "spotify.com",
+      "category": "B"
+    },
+    {
+      "domain": "zoom.us",
+      "category": "B"
+    },
+    {
+      "domain": "salesforce.com",
+      "category": "B"
+    },
+    {
+      "domain": "adobe.com",
+      "category": "B"
+    },
+    {
+      "domain": "shopify.com",
+      "category": "B"
+    },
+    {
+      "domain": "dropbox.com",
+      "category": "B"
+    },
+    {
+      "domain": "slack.com",
+      "category": "B"
+    },
+    {
+      "domain": "notion.so",
+      "category": "B"
+    },
+    {
+      "domain": "figma.com",
+      "category": "B"
+    },
+    {
+      "domain": "vercel.com",
+      "category": "B"
+    },
+    {
+      "domain": "netlify.com",
+      "category": "B"
+    },
+    {
+      "domain": "heroku.com",
+      "category": "B"
+    },
+    {
+      "domain": "digitalocean.com",
+      "category": "B"
+    },
+    {
+      "domain": "stripe.com",
+      "category": "B"
+    },
+    {
+      "domain": "paypal.com",
+      "category": "B"
+    },
+    {
+      "domain": "square.com",
+      "category": "B"
+    },
+    {
+      "domain": "medium.com",
+      "category": "B"
+    },
+    {
+      "domain": "substack.com",
+      "category": "B"
+    },
+    {
+      "domain": "wordpress.com",
+      "category": "B"
+    },
+    {
+      "domain": "tumblr.com",
+      "category": "B"
+    },
+    {
+      "domain": "blogger.com",
+      "category": "B"
+    },
+    {
+      "domain": "nytimes.com",
+      "category": "B"
+    },
+    {
+      "domain": "bbc.com",
+      "category": "B"
+    },
+    {
+      "domain": "cnn.com",
+      "category": "B"
+    },
+    {
+      "domain": "reuters.com",
+      "category": "B"
+    },
+    {
+      "domain": "washingtonpost.com",
+      "category": "B"
+    },
+    {
+      "domain": "nasa.gov",
+      "category": "B"
+    },
+    {
+      "domain": "mit.edu",
+      "category": "B"
+    },
+    {
+      "domain": "stanford.edu",
+      "category": "B"
+    },
+    {
+      "domain": "harvard.edu",
+      "category": "B"
+    },
+    {
+      "domain": "oxford.ac.uk",
+      "category": "B"
+    },
+    {
+      "domain": "hbrpoig8f1cb.com",
+      "category": "C"
+    },
+    {
+      "domain": "fno6b9m80o2r.com",
+      "category": "C"
+    },
+    {
+      "domain": "ak1vrjnvgfyg.com",
+      "category": "C"
+    },
+    {
+      "domain": "wwqc38hyf9sx.com",
+      "category": "C"
+    },
+    {
+      "domain": "mecosfogyr3x.com",
+      "category": "C"
+    },
+    {
+      "domain": "kxwnrek8pk3y.com",
+      "category": "C"
+    },
+    {
+      "domain": "r9oudocuzren.com",
+      "category": "C"
+    },
+    {
+      "domain": "un5z3jqip98q.com",
+      "category": "C"
+    },
+    {
+      "domain": "1zxoi65fdhjk.com",
+      "category": "C"
+    },
+    {
+      "domain": "1eyy37q9ah8r.com",
+      "category": "C"
+    },
+    {
+      "domain": "vhs1k3aq6l6g.com",
+      "category": "C"
+    },
+    {
+      "domain": "t6mjxk87au5b.com",
+      "category": "C"
+    },
+    {
+      "domain": "hxtpdpff5e8i.com",
+      "category": "C"
+    },
+    {
+      "domain": "i49kq71n8mtz.com",
+      "category": "C"
+    },
+    {
+      "domain": "x272hpoevb9o.com",
+      "category": "C"
+    },
+    {
+      "domain": "oaedoecve6pr.com",
+      "category": "C"
+    },
+    {
+      "domain": "5n8i4p40mgg1.com",
+      "category": "C"
+    },
+    {
+      "domain": "w103dgdzvgpm.com",
+      "category": "C"
+    },
+    {
+      "domain": "m82i1lr3pe29.com",
+      "category": "C"
+    },
+    {
+      "domain": "gd8afpk054nz.com",
+      "category": "C"
+    },
+    {
+      "domain": "dkyayq3s195j.com",
+      "category": "C"
+    },
+    {
+      "domain": "msnd8dudd467.com",
+      "category": "C"
+    },
+    {
+      "domain": "kd6fleepzhpc.com",
+      "category": "C"
+    },
+    {
+      "domain": "f07uqnupqzit.com",
+      "category": "C"
+    },
+    {
+      "domain": "3uea3ge8n6qi.com",
+      "category": "C"
+    },
+    {
+      "domain": "wepxsk28t7a9.com",
+      "category": "C"
+    },
+    {
+      "domain": "tgiqhg9jrsnv.com",
+      "category": "C"
+    },
+    {
+      "domain": "nq65qdf1rcav.com",
+      "category": "C"
+    },
+    {
+      "domain": "iqk2919ahej8.com",
+      "category": "C"
+    },
+    {
+      "domain": "cx9j1ictxcwn.com",
+      "category": "C"
+    },
+    {
+      "domain": "pgw90jpkl0bl.com",
+      "category": "C"
+    },
+    {
+      "domain": "v0prkgyc4om3.com",
+      "category": "C"
+    },
+    {
+      "domain": "wtoobmzvrerw.com",
+      "category": "C"
+    },
+    {
+      "domain": "6z8vbhqlqcg1.com",
+      "category": "C"
+    },
+    {
+      "domain": "wu16hymqc1a7.com",
+      "category": "C"
+    },
+    {
+      "domain": "8mx1evuht6t0.com",
+      "category": "C"
+    },
+    {
+      "domain": "uzs9im0yltz9.com",
+      "category": "C"
+    },
+    {
+      "domain": "atsn1u322n64.com",
+      "category": "C"
+    },
+    {
+      "domain": "kfs6vfptomjb.com",
+      "category": "C"
+    },
+    {
+      "domain": "cp4e30my5zpj.com",
+      "category": "C"
+    },
+    {
+      "domain": "ag1ol73d9ph3.com",
+      "category": "C"
+    },
+    {
+      "domain": "i379u26192k4.com",
+      "category": "C"
+    },
+    {
+      "domain": "2qpr75pr2esp.com",
+      "category": "C"
+    },
+    {
+      "domain": "rvu8fijoyjne.com",
+      "category": "C"
+    },
+    {
+      "domain": "00v830dn0yby.com",
+      "category": "C"
+    },
+    {
+      "domain": "4awty088o5or.com",
+      "category": "C"
+    },
+    {
+      "domain": "15byvzk3i8bz.com",
+      "category": "C"
+    },
+    {
+      "domain": "bf1i3ldqyun3.com",
+      "category": "C"
+    },
+    {
+      "domain": "uvyr0qf4b8dw.com",
+      "category": "C"
+    },
+    {
+      "domain": "oecbpmbjpi4h.com",
+      "category": "C"
+    },
+    {
+      "domain": "example.museum",
+      "category": "D"
+    },
+    {
+      "domain": "example.travel",
+      "category": "D"
+    },
+    {
+      "domain": "nic.coop",
+      "category": "D"
+    },
+    {
+      "domain": "nic.aero",
+      "category": "D"
+    },
+    {
+      "domain": "registro.br",
+      "category": "D"
+    },
+    {
+      "domain": "nic.ar",
+      "category": "D"
+    },
+    {
+      "domain": "nic.cl",
+      "category": "D"
+    },
+    {
+      "domain": "nic.pe",
+      "category": "D"
+    },
+    {
+      "domain": "domain.gov.au",
+      "category": "D"
+    },
+    {
+      "domain": "domain.gov.uk",
+      "category": "D"
+    },
+    {
+      "domain": "nic.in",
+      "category": "D"
+    },
+    {
+      "domain": "nic.jp",
+      "category": "D"
+    },
+    {
+      "domain": "nic.za",
+      "category": "D"
+    },
+    {
+      "domain": "nic.ke",
+      "category": "D"
+    },
+    {
+      "domain": "nic.ng",
+      "category": "D"
+    },
+    {
+      "domain": "nic.gh",
+      "category": "D"
+    },
+    {
+      "domain": "nic.tz",
+      "category": "D"
+    },
+    {
+      "domain": "registry.om",
+      "category": "D"
+    },
+    {
+      "domain": "nic.qa",
+      "category": "D"
+    },
+    {
+      "domain": "nic.kw",
+      "category": "D"
+    },
+    {
+      "domain": "nic.ly",
+      "category": "D"
+    },
+    {
+      "domain": "nic.tn",
+      "category": "D"
+    },
+    {
+      "domain": "nic.dz",
+      "category": "D"
+    },
+    {
+      "domain": "nic.ma",
+      "category": "D"
+    },
+    {
+      "domain": "nic.sn",
+      "category": "D"
+    },
+    {
+      "domain": "nic.ci",
+      "category": "D"
+    },
+    {
+      "domain": "nic.cm",
+      "category": "D"
+    },
+    {
+      "domain": "nic.ga",
+      "category": "D"
+    },
+    {
+      "domain": "nic.tg",
+      "category": "D"
+    },
+    {
+      "domain": "nic.bj",
+      "category": "D"
+    },
+    {
+      "domain": "nic.bf",
+      "category": "D"
+    },
+    {
+      "domain": "nic.ml",
+      "category": "D"
+    },
+    {
+      "domain": "nic.gn",
+      "category": "D"
+    },
+    {
+      "domain": "nic.sl",
+      "category": "D"
+    },
+    {
+      "domain": "nic.lr",
+      "category": "D"
+    },
+    {
+      "domain": "nic.gm",
+      "category": "D"
+    },
+    {
+      "domain": "nic.cv",
+      "category": "D"
+    },
+    {
+      "domain": "nic.st",
+      "category": "D"
+    },
+    {
+      "domain": "nic.td",
+      "category": "D"
+    },
+    {
+      "domain": "nic.cf",
+      "category": "D"
+    },
+    {
+      "domain": "nic.cg",
+      "category": "D"
+    },
+    {
+      "domain": "nic.cd",
+      "category": "D"
+    },
+    {
+      "domain": "nic.rw",
+      "category": "D"
+    },
+    {
+      "domain": "nic.bi",
+      "category": "D"
+    },
+    {
+      "domain": "nic.ug",
+      "category": "D"
+    },
+    {
+      "domain": "nic.mw",
+      "category": "D"
+    },
+    {
+      "domain": "nic.zm",
+      "category": "D"
+    },
+    {
+      "domain": "nic.zw",
+      "category": "D"
+    },
+    {
+      "domain": "nic.bw",
+      "category": "D"
+    },
+    {
+      "domain": "nic.na",
+      "category": "D"
+    },
+    {
+      "domain": "chase.com",
+      "category": "E"
+    },
+    {
+      "domain": "bankofamerica.com",
+      "category": "E"
+    },
+    {
+      "domain": "wellsfargo.com",
+      "category": "E"
+    },
+    {
+      "domain": "citibank.com",
+      "category": "E"
+    },
+    {
+      "domain": "usbank.com",
+      "category": "E"
+    },
+    {
+      "domain": "capitalone.com",
+      "category": "E"
+    },
+    {
+      "domain": "ally.com",
+      "category": "E"
+    },
+    {
+      "domain": "schwab.com",
+      "category": "E"
+    },
+    {
+      "domain": "fidelity.com",
+      "category": "E"
+    },
+    {
+      "domain": "vanguard.com",
+      "category": "E"
+    },
+    {
+      "domain": "tdameritrade.com",
+      "category": "E"
+    },
+    {
+      "domain": "etrade.com",
+      "category": "E"
+    },
+    {
+      "domain": "robinhood.com",
+      "category": "E"
+    },
+    {
+      "domain": "coinbase.com",
+      "category": "E"
+    },
+    {
+      "domain": "binance.com",
+      "category": "E"
+    },
+    {
+      "domain": "kraken.com",
+      "category": "E"
+    },
+    {
+      "domain": "airbnb.com",
+      "category": "E"
+    },
+    {
+      "domain": "uber.com",
+      "category": "E"
+    },
+    {
+      "domain": "lyft.com",
+      "category": "E"
+    },
+    {
+      "domain": "doordash.com",
+      "category": "E"
+    },
+    {
+      "domain": "grubhub.com",
+      "category": "E"
+    },
+    {
+      "domain": "instacart.com",
+      "category": "E"
+    },
+    {
+      "domain": "walmart.com",
+      "category": "E"
+    },
+    {
+      "domain": "target.com",
+      "category": "E"
+    },
+    {
+      "domain": "costco.com",
+      "category": "E"
+    },
+    {
+      "domain": "homedepot.com",
+      "category": "E"
+    },
+    {
+      "domain": "lowes.com",
+      "category": "E"
+    },
+    {
+      "domain": "bestbuy.com",
+      "category": "E"
+    },
+    {
+      "domain": "ikea.com",
+      "category": "E"
+    },
+    {
+      "domain": "wayfair.com",
+      "category": "E"
+    },
+    {
+      "domain": "ebay.com",
+      "category": "E"
+    },
+    {
+      "domain": "etsy.com",
+      "category": "E"
+    },
+    {
+      "domain": "wish.com",
+      "category": "E"
+    },
+    {
+      "domain": "aliexpress.com",
+      "category": "E"
+    },
+    {
+      "domain": "rakuten.com",
+      "category": "E"
+    },
+    {
+      "domain": "mercadolibre.com",
+      "category": "E"
+    },
+    {
+      "domain": "booking.com",
+      "category": "E"
+    },
+    {
+      "domain": "expedia.com",
+      "category": "E"
+    },
+    {
+      "domain": "tripadvisor.com",
+      "category": "E"
+    },
+    {
+      "domain": "kayak.com",
+      "category": "E"
+    },
+    {
+      "domain": "southwest.com",
+      "category": "E"
+    },
+    {
+      "domain": "united.com",
+      "category": "E"
+    },
+    {
+      "domain": "delta.com",
+      "category": "E"
+    },
+    {
+      "domain": "aa.com",
+      "category": "E"
+    },
+    {
+      "domain": "hilton.com",
+      "category": "E"
+    },
+    {
+      "domain": "marriott.com",
+      "category": "E"
+    },
+    {
+      "domain": "airbnb.com",
+      "category": "E"
+    },
+    {
+      "domain": "vrbo.com",
+      "category": "E"
+    },
+    {
+      "domain": "zillow.com",
+      "category": "E"
+    },
+    {
+      "domain": "redfin.com",
+      "category": "E"
+    }
+  ]
+}

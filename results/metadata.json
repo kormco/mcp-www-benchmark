@@ -1,0 +1,25 @@
+{
+  "start_time": 1773171398.6682954,
+  "domains_file": "domains.json",
+  "domain_count": 201,
+  "methods": [
+    "dns_mcp",
+    "http_well_known",
+    "website_scrape"
+  ],
+  "concurrency_levels": [
+    1,
+    10,
+    50
+  ],
+  "cache_states": [
+    "cold"
+  ],
+  "runs_per_config": 1,
+  "total_batches": 9,
+  "total_queries": 1809,
+  "platform": "win32",
+  "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "end_time": 1773171780.2875984,
+  "elapsed_seconds": 381.6183035373688
+}
