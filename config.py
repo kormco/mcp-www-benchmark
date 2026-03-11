@@ -1,8 +1,10 @@
 """Experiment configuration constants."""
 
 # DNS resolver to use (pinned for consistency)
-DNS_RESOLVER = "8.8.8.8"
-DNS_RESOLVER_PORT = 53
+# Previous run used "8.8.8.8" port 53 (Google Public DNS)
+# Now using local Unbound recursive resolver on Synology NAS
+DNS_RESOLVER = "192.168.68.133"
+DNS_RESOLVER_PORT = 5335
 
 # Query timeout in seconds
 QUERY_TIMEOUT = 5.0
@@ -11,7 +13,7 @@ QUERY_TIMEOUT = 5.0
 CONCURRENCY_LEVELS = [1, 10, 50, 100, 500]
 
 # Number of runs per configuration
-RUNS_PER_CONFIG = 10
+RUNS_PER_CONFIG = 3
 
 # Cache states to test
 CACHE_STATES = ["cold", "warm"]

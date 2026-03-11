@@ -13,7 +13,7 @@ import dns.resolver
 import dns.rdatatype
 import dns.name
 
-from config import DNS_RESOLVER, QUERY_TIMEOUT
+from config import DNS_RESOLVER, DNS_RESOLVER_PORT, QUERY_TIMEOUT
 from src.models import QueryResult
 
 
@@ -21,6 +21,7 @@ def _make_resolver() -> dns.asyncresolver.Resolver:
     """Create a DNS resolver pinned to our configured nameserver."""
     resolver = dns.asyncresolver.Resolver()
     resolver.nameservers = [DNS_RESOLVER]
+    resolver.port = DNS_RESOLVER_PORT
     resolver.lifetime = QUERY_TIMEOUT
     resolver.timeout = QUERY_TIMEOUT
     return resolver
