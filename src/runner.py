@@ -15,9 +15,10 @@ import httpx
 from config import (
     CONCURRENCY_LEVELS, CACHE_STATES, RUNS_PER_CONFIG,
     RAW_RESULTS_DIR, SYSTEM_METRICS_DIR, QUERY_TIMEOUT,
+    DNS_RESOLVER, DNS_RESOLVER_PORT,
 )
 from src.models import QueryResult, RunConfig
-from src.dns_prober import probe_dns, _make_resolver
+from src.mcpwww_prober import McpWwwClient, probe_mcp_www
 from src.http_prober import probe_http_well_known
 from src.cache_control import flush_dns_cache
 from src.metrics import MetricsCollector
@@ -32,20 +33,15 @@ def load_domains(path: str) -> List[Tuple[str, str]]:
 
 async def run_batch(
     config: RunConfig,
+    mcpwww_client: McpWwwClient = None,
     progress_callback=None,
 ) -> List[QueryResult]:
     """Run a single batch: one method, one concurrency level, all domains."""
 
     semaphore = asyncio.Semaphore(config.concurrency_level)
-    results: List[QueryResult] = []
-
-    # Set up shared resources based on method
-    resolver = None
     client = None
 
-    if config.method == "dns_mcp":
-        resolver = _make_resolver()
-    elif config.method == "http_well_known":
+    if config.method == "http_well_known":
         client = httpx.AsyncClient(
             timeout=QUERY_TIMEOUT,
             follow_redirects=True,
@@ -54,10 +50,10 @@ async def run_batch(
 
     async def probe_one(domain: str, category: str) -> QueryResult:
         async with semaphore:
-            if config.method == "dns_mcp":
-                return await probe_dns(
+            if config.method == "mcp_www":
+                return await probe_mcp_www(
                     domain, category, config.concurrency_level,
-                    config.cache_state, config.run_id, resolver,
+                    config.cache_state, config.run_id, mcpwww_client,
                 )
             elif config.method == "http_well_known":
                 return await probe_http_well_known(
@@ -96,7 +92,7 @@ async def run_experiment(
 ):
     """Run the full experiment matrix."""
 
-    methods = methods or ["dns_mcp", "http_well_known"]
+    methods = methods or ["mcp_www", "http_well_known"]
     concurrency_levels = concurrency_levels or CONCURRENCY_LEVELS
     cache_states = cache_states or CACHE_STATES
     runs_per_config = runs_per_config or RUNS_PER_CONFIG
@@ -108,63 +104,76 @@ async def run_experiment(
     os.makedirs(RAW_RESULTS_DIR, exist_ok=True)
     os.makedirs(SYSTEM_METRICS_DIR, exist_ok=True)
 
-    for cache_state in cache_states:
-        for concurrency in concurrency_levels:
-            for run_id in range(runs_per_config):
-                # Alternate method order to control for temporal effects
-                if run_id % 2 == 0:
-                    method_order = methods
-                else:
-                    method_order = list(reversed(methods))
+    # Start mcp-www client if needed
+    mcpwww_client = None
+    if "mcp_www" in methods:
+        dns_server = f"{DNS_RESOLVER}:{DNS_RESOLVER_PORT}"
+        mcpwww_client = McpWwwClient(dns_server=dns_server)
+        await mcpwww_client.start()
+        print(f"[mcp-www] Started with DNS resolver {dns_server}")
 
-                for method in method_order:
-                    config = RunConfig(
-                        method=method,
-                        concurrency_level=concurrency,
-                        cache_state=cache_state,
-                        run_id=run_id,
-                        domains=domains,
-                    )
+    try:
+        for cache_state in cache_states:
+            for concurrency in concurrency_levels:
+                for run_id in range(runs_per_config):
+                    # Alternate method order to control for temporal effects
+                    if run_id % 2 == 0:
+                        method_order = methods
+                    else:
+                        method_order = list(reversed(methods))
 
-                    # Flush DNS cache for cold runs
-                    if cache_state == "cold":
-                        flush_dns_cache()
-                        await asyncio.sleep(0.5)  # let flush settle
-
-                    # Warm-up pass for warm cache state (first run only)
-                    if cache_state == "warm" and run_id == 0:
-                        warmup_config = RunConfig(
+                    for method in method_order:
+                        config = RunConfig(
                             method=method,
                             concurrency_level=concurrency,
-                            cache_state="warmup",
-                            run_id=-1,
+                            cache_state=cache_state,
+                            run_id=run_id,
                             domains=domains,
                         )
-                        await run_batch(warmup_config)
 
-                    # Collect system metrics
-                    collector = MetricsCollector()
-                    collector.start()
+                        # Flush DNS cache for cold runs
+                        if cache_state == "cold":
+                            flush_dns_cache()
+                            await asyncio.sleep(0.5)  # let flush settle
 
-                    # Run the actual batch
-                    t_batch_start = time.perf_counter()
-                    results = await run_batch(config, progress_callback)
-                    t_batch_end = time.perf_counter()
+                        # Warm-up pass for warm cache state (first run only)
+                        if cache_state == "warm" and run_id == 0:
+                            warmup_config = RunConfig(
+                                method=method,
+                                concurrency_level=concurrency,
+                                cache_state="warmup",
+                                run_id=-1,
+                                domains=domains,
+                            )
+                            await run_batch(warmup_config, mcpwww_client)
 
-                    # Stop metrics collection
-                    system_samples = collector.stop()
-                    metrics_path = os.path.join(SYSTEM_METRICS_DIR, f"{config.label}.csv")
-                    collector.save_csv(metrics_path)
+                        # Collect system metrics
+                        collector = MetricsCollector()
+                        collector.start()
 
-                    # Save results
-                    save_results(results, config)
+                        # Run the actual batch
+                        t_batch_start = time.perf_counter()
+                        results = await run_batch(config, mcpwww_client, progress_callback)
+                        t_batch_end = time.perf_counter()
 
-                    batch_time = t_batch_end - t_batch_start
-                    qps = len(results) / batch_time if batch_time > 0 else 0
+                        # Stop metrics collection
+                        system_samples = collector.stop()
+                        metrics_path = os.path.join(SYSTEM_METRICS_DIR, f"{config.label}.csv")
+                        collector.save_csv(metrics_path)
 
-                    completed += 1
-                    print(
-                        f"[{completed}/{total_configs * len(methods)}] "
-                        f"{config.label}: {len(results)} queries in "
-                        f"{batch_time:.2f}s ({qps:.1f} q/s)"
-                    )
+                        # Save results
+                        save_results(results, config)
+
+                        batch_time = t_batch_end - t_batch_start
+                        qps = len(results) / batch_time if batch_time > 0 else 0
+
+                        completed += 1
+                        print(
+                            f"[{completed}/{total_configs * len(methods)}] "
+                            f"{config.label}: {len(results)} queries in "
+                            f"{batch_time:.2f}s ({qps:.1f} q/s)"
+                        )
+    finally:
+        if mcpwww_client:
+            await mcpwww_client.stop()
+            print("[mcp-www] Stopped")

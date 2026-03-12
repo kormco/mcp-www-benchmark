@@ -58,7 +58,7 @@ def extract_cold_latencies(method: str) -> List[float]:
     the latency_ms values for successful queries.
 
     Args:
-        method: "dns_mcp" or "http_well_known"
+        method: "mcp_www", "dns_mcp", or "http_well_known"
 
     Returns:
         List of latency_ms values (floats).
@@ -85,7 +85,8 @@ class SimConfig:
     def __init__(self):
         self.domains = load_domains()
         self.mcp_enabled = select_mcp_enabled_domains(self.domains, fraction=0.5)
-        self.dns_latencies = extract_cold_latencies("dns_mcp")
+        # Try mcp_www first (new method name), fall back to dns_mcp (legacy)
+        self.dns_latencies = extract_cold_latencies("mcp_www") or extract_cold_latencies("dns_mcp")
         self.http_latencies = extract_cold_latencies("http_well_known")
 
         if not self.dns_latencies:

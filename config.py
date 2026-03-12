@@ -19,11 +19,14 @@ RUNS_PER_CONFIG = 3
 CACHE_STATES = ["cold", "warm"]
 
 # Discovery methods to compare
-METHODS = ["dns_mcp", "http_well_known"]
+METHODS = ["mcp_www", "http_well_known"]
 METHOD_LABELS = {
-    "dns_mcp": "DNS-based (mcp-www)",
-    "http_well_known": "HTTP MCP Discovery (/.well-known/mcp)",
+    "mcp_www": "mcp-www (browse_discover)",
+    "http_well_known": "HTTP (/.well-known/mcp)",
 }
+
+# Path to locally-built mcp-www
+MCP_WWW_NODE_PATH = "/home/kormco/mcp-www/dist/index.js"
 
 # HTTP discovery path
 HTTP_WELL_KNOWN_PATH = "/.well-known/mcp"

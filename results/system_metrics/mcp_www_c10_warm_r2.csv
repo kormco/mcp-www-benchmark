@@ -1,0 +1,2 @@
+timestamp,cpu_percent,memory_rss_mb,open_fds,net_bytes_sent,net_bytes_recv
+1773291549.4381227,0.0,83.9,9,373,252

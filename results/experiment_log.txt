@@ -1,0 +1,75 @@
+============================================================
+MCP Discovery Benchmark
+============================================================
+Domains:      201
+Methods:      mcp_www, http_well_known
+Concurrency:  [1, 10, 50, 100, 500]
+Cache states: ['cold', 'warm']
+Runs/config:  3
+Total batches: 60
+Total queries: 12060
+============================================================
+[mcp-www] Started with DNS resolver 192.168.68.133:5335
+[1/60] mcp_www_c1_cold_r0: 201 queries in 0.76s (264.0 q/s)
+[2/60] http_well_known_c1_cold_r0: 201 queries in 157.38s (1.3 q/s)
+[3/60] http_well_known_c1_cold_r1: 201 queries in 150.06s (1.3 q/s)
+[4/60] mcp_www_c1_cold_r1: 201 queries in 0.79s (253.2 q/s)
+[5/60] mcp_www_c1_cold_r2: 201 queries in 0.21s (976.5 q/s)
+[6/60] http_well_known_c1_cold_r2: 201 queries in 158.97s (1.3 q/s)
+[7/60] mcp_www_c10_cold_r0: 201 queries in 0.50s (400.0 q/s)
+[8/60] http_well_known_c10_cold_r0: 201 queries in 19.19s (10.5 q/s)
+[9/60] http_well_known_c10_cold_r1: 201 queries in 19.82s (10.1 q/s)
+[10/60] mcp_www_c10_cold_r1: 201 queries in 0.70s (286.9 q/s)
+[11/60] mcp_www_c10_cold_r2: 201 queries in 0.09s (2117.9 q/s)
+[12/60] http_well_known_c10_cold_r2: 201 queries in 20.11s (10.0 q/s)
+[13/60] mcp_www_c50_cold_r0: 201 queries in 0.49s (406.7 q/s)
+[14/60] http_well_known_c50_cold_r0: 201 queries in 7.22s (27.8 q/s)
+[15/60] http_well_known_c50_cold_r1: 201 queries in 7.55s (26.6 q/s)
+[16/60] mcp_www_c50_cold_r1: 201 queries in 0.49s (408.3 q/s)
+[17/60] mcp_www_c50_cold_r2: 201 queries in 0.11s (1868.1 q/s)
+[18/60] http_well_known_c50_cold_r2: 201 queries in 7.44s (27.0 q/s)
+[19/60] mcp_www_c100_cold_r0: 201 queries in 0.50s (405.7 q/s)
+[20/60] http_well_known_c100_cold_r0: 201 queries in 6.86s (29.3 q/s)
+[21/60] http_well_known_c100_cold_r1: 201 queries in 6.81s (29.5 q/s)
+[22/60] mcp_www_c100_cold_r1: 201 queries in 0.59s (339.3 q/s)
+[23/60] mcp_www_c100_cold_r2: 201 queries in 0.10s (1941.7 q/s)
+[24/60] http_well_known_c100_cold_r2: 201 queries in 6.74s (29.8 q/s)
+[25/60] mcp_www_c500_cold_r0: 201 queries in 0.41s (494.1 q/s)
+[26/60] http_well_known_c500_cold_r0: 201 queries in 7.36s (27.3 q/s)
+[27/60] http_well_known_c500_cold_r1: 201 queries in 9.64s (20.9 q/s)
+[28/60] mcp_www_c500_cold_r1: 201 queries in 0.45s (442.9 q/s)
+[29/60] mcp_www_c500_cold_r2: 201 queries in 0.10s (1983.6 q/s)
+[30/60] http_well_known_c500_cold_r2: 201 queries in 7.24s (27.7 q/s)
+[31/60] mcp_www_c1_warm_r0: 201 queries in 0.19s (1074.1 q/s)
+[32/60] http_well_known_c1_warm_r0: 201 queries in 144.00s (1.4 q/s)
+[33/60] http_well_known_c1_warm_r1: 201 queries in 139.62s (1.4 q/s)
+[34/60] mcp_www_c1_warm_r1: 201 queries in 0.64s (314.0 q/s)
+[35/60] mcp_www_c1_warm_r2: 201 queries in 0.25s (817.0 q/s)
+[36/60] http_well_known_c1_warm_r2: 201 queries in 134.27s (1.5 q/s)
+[37/60] mcp_www_c10_warm_r0: 201 queries in 0.10s (2086.4 q/s)
+[38/60] http_well_known_c10_warm_r0: 201 queries in 17.64s (11.4 q/s)
+[39/60] http_well_known_c10_warm_r1: 201 queries in 17.46s (11.5 q/s)
+[40/60] mcp_www_c10_warm_r1: 201 queries in 0.70s (287.8 q/s)
+[41/60] mcp_www_c10_warm_r2: 201 queries in 0.09s (2230.2 q/s)
+[42/60] http_well_known_c10_warm_r2: 201 queries in 17.24s (11.7 q/s)
+[43/60] mcp_www_c50_warm_r0: 201 queries in 0.10s (2044.4 q/s)
+[44/60] http_well_known_c50_warm_r0: 201 queries in 6.99s (28.7 q/s)
+[45/60] http_well_known_c50_warm_r1: 201 queries in 6.92s (29.1 q/s)
+[46/60] mcp_www_c50_warm_r1: 201 queries in 0.50s (400.9 q/s)
+[47/60] mcp_www_c50_warm_r2: 201 queries in 0.57s (354.8 q/s)
+[48/60] http_well_known_c50_warm_r2: 201 queries in 6.98s (28.8 q/s)
+[49/60] mcp_www_c100_warm_r0: 201 queries in 0.09s (2130.9 q/s)
+[50/60] http_well_known_c100_warm_r0: 201 queries in 9.08s (22.1 q/s)
+[51/60] http_well_known_c100_warm_r1: 201 queries in 6.74s (29.8 q/s)
+[52/60] mcp_www_c100_warm_r1: 201 queries in 0.46s (436.5 q/s)
+[53/60] mcp_www_c100_warm_r2: 201 queries in 0.10s (2065.3 q/s)
+[54/60] http_well_known_c100_warm_r2: 201 queries in 6.74s (29.8 q/s)
+[55/60] mcp_www_c500_warm_r0: 201 queries in 0.10s (1965.8 q/s)
+[56/60] http_well_known_c500_warm_r0: 201 queries in 6.58s (30.5 q/s)
+[57/60] http_well_known_c500_warm_r1: 201 queries in 7.53s (26.7 q/s)
+[58/60] mcp_www_c500_warm_r1: 201 queries in 0.46s (434.5 q/s)
+[59/60] mcp_www_c500_warm_r2: 201 queries in 0.13s (1520.2 q/s)
+[60/60] http_well_known_c500_warm_r2: 201 queries in 6.81s (29.5 q/s)
+[mcp-www] Stopped
+
+Experiment complete in 1335.5s

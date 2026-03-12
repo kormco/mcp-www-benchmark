@@ -1,8 +1,8 @@
 """Run the 50% MCP adoption simulation experiment.
 
 Starts simulated DNS and HTTP servers, then runs the experiment matrix
-using the same probers as the real experiment but pointed at the sim servers.
-Only tests cold-cache since we inject cold-cache latency distributions.
+using mcp-www (browse_discover) pointed at the sim DNS server, and
+direct HTTP pointed at the sim HTTP server.
 
 Results are saved to results/sim_50pct/.
 """
@@ -19,7 +19,6 @@ from typing import List, Tuple
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-import dns.asyncresolver
 import httpx
 
 from sim.sim_config import (
@@ -35,19 +34,8 @@ from sim.sim_config import (
 from sim.dns_server import start_dns_server
 from sim.http_server import start_http_server
 from src.models import QueryResult, RunConfig
-from src.dns_prober import probe_dns
-from src.http_prober import probe_http_well_known
+from src.mcpwww_prober import McpWwwClient, probe_mcp_www
 from config import QUERY_TIMEOUT
-
-
-def make_sim_dns_resolver() -> dns.asyncresolver.Resolver:
-    """Create a DNS resolver pointing at the sim DNS server."""
-    resolver = dns.asyncresolver.Resolver()
-    resolver.nameservers = [SIM_DNS_HOST]
-    resolver.port = SIM_DNS_PORT
-    resolver.lifetime = QUERY_TIMEOUT
-    resolver.timeout = QUERY_TIMEOUT
-    return resolver
 
 
 async def probe_sim_http(
@@ -129,16 +117,14 @@ async def probe_sim_http(
 
 async def run_sim_batch(
     config: RunConfig,
-    dns_resolver: dns.asyncresolver.Resolver = None,
+    mcpwww_client: McpWwwClient = None,
     http_client: httpx.AsyncClient = None,
 ) -> List[QueryResult]:
     """Run a single batch against simulated servers."""
     semaphore = asyncio.Semaphore(config.concurrency_level)
     own_client = False
 
-    if config.method == "dns_mcp" and dns_resolver is None:
-        dns_resolver = make_sim_dns_resolver()
-    elif config.method == "http_well_known" and http_client is None:
+    if config.method == "http_well_known" and http_client is None:
         http_client = httpx.AsyncClient(
             timeout=QUERY_TIMEOUT,
             follow_redirects=True,
@@ -152,10 +138,10 @@ async def run_sim_batch(
 
     async def probe_one(domain: str, category: str) -> QueryResult:
         async with semaphore:
-            if config.method == "dns_mcp":
-                return await probe_dns(
+            if config.method == "mcp_www":
+                return await probe_mcp_www(
                     domain, category, config.concurrency_level,
-                    config.cache_state, config.run_id, dns_resolver,
+                    config.cache_state, config.run_id, mcpwww_client,
                 )
             elif config.method == "http_well_known":
                 return await probe_sim_http(
@@ -199,8 +185,14 @@ async def run_sim_experiment():
     # Give servers a moment to be ready
     await asyncio.sleep(0.5)
 
+    # Start mcp-www client pointed at sim DNS server
+    dns_server = f"{SIM_DNS_HOST}:{SIM_DNS_PORT}"
+    mcpwww_client = McpWwwClient(dns_server=dns_server)
+    await mcpwww_client.start()
+    print(f"[sim] mcp-www started with DNS resolver {dns_server}")
+
     domains = [(d["domain"], d["category"]) for d in config.domains]
-    methods = ["dns_mcp", "http_well_known"]
+    methods = ["mcp_www", "http_well_known"]
     cache_states = ["cold"]  # Only cold — we inject cold latency
 
     os.makedirs(SIM_RESULTS_DIR, exist_ok=True)
@@ -224,7 +216,7 @@ async def run_sim_experiment():
                     )
 
                     t_start = time.perf_counter()
-                    results = await run_sim_batch(run_config)
+                    results = await run_sim_batch(run_config, mcpwww_client)
                     t_end = time.perf_counter()
 
                     save_sim_results(results, run_config)
@@ -243,8 +235,9 @@ async def run_sim_experiment():
                     )
 
     finally:
-        # Shutdown servers
-        print("\n[sim] Shutting down servers...")
+        # Shutdown
+        print("\n[sim] Shutting down...")
+        await mcpwww_client.stop()
         dns_transport.close()
         await http_runner.cleanup()
 

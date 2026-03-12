@@ -1,11 +1,10 @@
 {
-  "start_time": 1773184696.8240378,
+  "start_time": 1773290321.4630578,
   "domains_file": "domains.json",
   "domain_count": 201,
   "methods": [
-    "dns_mcp",
-    "http_well_known",
-    "website_scrape"
+    "mcp_www",
+    "http_well_known"
   ],
   "concurrency_levels": [
     1,
@@ -19,10 +18,10 @@
     "warm"
   ],
   "runs_per_config": 3,
-  "total_batches": 90,
-  "total_queries": 18090,
+  "total_batches": 60,
+  "total_queries": 12060,
   "platform": "linux",
   "python_version": "3.10.12 (main, Jan  8 2026, 06:52:19) [GCC 11.4.0]",
-  "end_time": 1773187934.7723467,
-  "elapsed_seconds": 3237.9481801986694
+  "end_time": 1773291656.9972994,
+  "elapsed_seconds": 1335.534102678299
 }
