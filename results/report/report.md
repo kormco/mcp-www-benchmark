@@ -94,27 +94,36 @@ Simulated 50% MCP adoption (100/201 domains have MCP servers). Uses local DNS an
 
 | Method | Concurrency | Cache | Median (ms) | P95 (ms) | P99 (ms) | Success % | MCP Found % | Throughput (q/s) |
 |--------|-------------|-------|-------------|----------|----------|-----------|-------------|------------------|
-| HTTP (/.well-known/mcp) | c1 | cold | 735.1 | 4677.0 | 5008.9 | 95.0 | 47.6 | 0.9 |
-| HTTP (/.well-known/mcp) | c10 | cold | 728.4 | 4146.6 | 5004.9 | 95.4 | 48.3 | 0.9 |
-| HTTP (/.well-known/mcp) | c50 | cold | 779.3 | 3042.3 | 5027.5 | 96.5 | 48.6 | 0.9 |
-| HTTP (/.well-known/mcp) | c100 | cold | 756.0 | 4242.5 | 5056.6 | 95.5 | 47.6 | 0.8 |
-| HTTP (/.well-known/mcp) | c500 | cold | 1302.6 | 3750.6 | 5397.4 | 96.7 | 48.4 | 0.6 |
+| HTTP (/.well-known/mcp) | c1 | cold | 591.6 | 3438.1 | 5027.2 | 96.5 | 48.6 | 1.0 |
+| HTTP (/.well-known/mcp) | c10 | cold | 644.9 | 3426.8 | 5004.4 | 96.2 | 48.4 | 1.0 |
+| HTTP (/.well-known/mcp) | c50 | cold | 653.6 | 3131.7 | 5015.1 | 96.4 | 48.1 | 1.0 |
+| HTTP (/.well-known/mcp) | c100 | cold | 699.3 | 4008.1 | 5070.6 | 96.2 | 47.8 | 0.9 |
+| HTTP (/.well-known/mcp) | c500 | cold | 1254.4 | 3463.2 | 5668.4 | 97.5 | 49.1 | 0.7 |
+| mcp-www (browse_discover) | c1 | cold | 8.0 | 22.1 | 30.9 | 100.0 | 50.2 | 89.5 |
+| mcp-www (browse_discover) | c10 | cold | 7.4 | 20.0 | 22.3 | 100.0 | 50.2 | 87.7 |
+| mcp-www (browse_discover) | c50 | cold | 27.7 | 64.3 | 86.1 | 100.0 | 50.2 | 31.1 |
+| mcp-www (browse_discover) | c100 | cold | 46.5 | 107.1 | 120.5 | 100.0 | 50.2 | 18.7 |
+| mcp-www (browse_discover) | c500 | cold | 69.0 | 169.7 | 181.5 | 100.0 | 50.2 | 12.9 |
 
 ### Simulation Statistical Comparisons
 
 | Comparison | Concurrency | Cache | Median A (ms) | Median B (ms) | Speedup | p-value | Significant | Effect Size |
 |------------|-------------|-------|---------------|---------------|---------|---------|-------------|-------------|
-
+| http_well_known vs mcp_www | 1 | cold | 591.6 | 8.0 | 0.01x | 1.44e-197 | Yes | 1.236 |
+| http_well_known vs mcp_www | 10 | cold | 644.9 | 7.4 | 0.01x | 4.32e-197 | Yes | 1.292 |
+| http_well_known vs mcp_www | 50 | cold | 653.6 | 27.7 | 0.04x | 1.28e-197 | Yes | 1.314 |
+| http_well_known vs mcp_www | 100 | cold | 699.3 | 46.5 | 0.07x | 9.60e-197 | Yes | 1.285 |
+| http_well_known vs mcp_www | 500 | cold | 1254.4 | 69.0 | 0.05x | 4.41e-198 | Yes | 1.702 |
 
 ### Simulation Charts
 
-#### Latency Cdf Cold — 50% Adoption Sim
+#### Latency Cdf Cold 50Pct Adoption Sim
 
-![Latency Cdf Cold — 50% Adoption Sim](latency_cdf_cold_—_50%_adoption_sim.png)
+![Latency Cdf Cold 50Pct Adoption Sim](latency_cdf_cold_50pct_adoption_sim.png)
 
-#### Throughput Cold — 50% Adoption Sim
+#### Throughput Cold 50Pct Adoption Sim
 
-![Throughput Cold — 50% Adoption Sim](throughput_cold_—_50%_adoption_sim.png)
+![Throughput Cold 50Pct Adoption Sim](throughput_cold_50pct_adoption_sim.png)
 
 ## Methodology
 

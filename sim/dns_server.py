@@ -19,7 +19,7 @@ from dnslib import DNSRecord, DNSHeader, RR, TXT, QTYPE, RCODE
 
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from sim.sim_config import SimConfig, SIM_DNS_HOST, SIM_DNS_PORT
+from sim.sim_config import SimConfig, SIM_DNS_HOST, SIM_DNS_PORT, SIM_MCP_HOST, SIM_MCP_PORT
 
 
 class SimDNSProtocol(asyncio.DatagramProtocol):
@@ -63,7 +63,7 @@ class SimDNSProtocol(asyncio.DatagramProtocol):
             domain = qname[5:]  # strip "_mcp." prefix
             if domain in self.config.mcp_enabled:
                 # MCP-enabled: return TXT record
-                txt_value = f"v=mcp1; src=https://mcp.{domain}; auth=none"
+                txt_value = f"v=mcp1; src=http://{SIM_MCP_HOST}:{SIM_MCP_PORT}; auth=none"
                 reply.add_answer(
                     RR(
                         rname=request.q.qname,

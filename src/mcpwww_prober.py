@@ -146,9 +146,12 @@ async def probe_mcp_www(
                 raw_text += block.get("text", "")
 
         # Determine if an MCP server was actually found
-        # browse_discover prefixes with "Discovered MCP server for" on success,
-        # or returns JSON with "found": false on miss
-        mcp_found = "Discovered MCP server for" in raw_text
+        # browse_discover either prefixes with "Discovered MCP server for" (when
+        # server has instructions) or returns JSON with "found": true + "server"
+        mcp_found = (
+            "Discovered MCP server for" in raw_text
+            or ('"found": true' in raw_text and '"serverInfo"' in raw_text)
+        )
 
         # Approximate bytes: request JSON + response JSON
         request_json = json.dumps({

@@ -33,6 +33,7 @@ from sim.sim_config import (
 )
 from sim.dns_server import start_dns_server
 from sim.http_server import start_http_server
+from sim.mcp_server import start_mcp_server
 from src.models import QueryResult, RunConfig
 from src.mcpwww_prober import McpWwwClient, probe_mcp_www
 from config import QUERY_TIMEOUT
@@ -181,6 +182,7 @@ async def run_sim_experiment():
     # Start sim servers
     dns_transport = await start_dns_server(config)
     http_runner = await start_http_server(config)
+    mcp_runner = await start_mcp_server(config)
 
     # Give servers a moment to be ready
     await asyncio.sleep(0.5)
@@ -240,6 +242,7 @@ async def run_sim_experiment():
         await mcpwww_client.stop()
         dns_transport.close()
         await http_runner.cleanup()
+        await mcp_runner.cleanup()
 
     print(f"\n[sim] Results saved to {SIM_RESULTS_DIR}")
     print("[sim] Experiment complete.")

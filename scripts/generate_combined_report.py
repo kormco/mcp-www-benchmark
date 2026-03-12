@@ -124,7 +124,8 @@ def plot_latency_cdf(results, cache_state, suffix=""):
 
     fig.suptitle(f"Latency CDF ({cache_state} cache){suffix}", fontsize=14)
     plt.tight_layout()
-    fname = f"latency_cdf_{cache_state}{suffix.replace(' ', '_').lower()}.png"
+    safe_suffix = suffix.replace(' ', '_').replace('—', '').replace('%', 'pct').lower().strip('_')
+    fname = f"latency_cdf_{cache_state}{'_' + safe_suffix if safe_suffix else ''}.png"
     path = os.path.join(REPORT_OUTPUT_DIR, fname)
     fig.savefig(path, dpi=150, bbox_inches="tight")
     plt.close(fig)
@@ -161,7 +162,8 @@ def plot_throughput(results, cache_state, suffix=""):
     ax.legend()
     ax.grid(True, alpha=0.3)
 
-    fname = f"throughput_{cache_state}{suffix.replace(' ', '_').lower()}.png"
+    safe_suffix = suffix.replace(' ', '_').replace('—', '').replace('%', 'pct').lower().strip('_')
+    fname = f"throughput_{cache_state}{'_' + safe_suffix if safe_suffix else ''}.png"
     path = os.path.join(REPORT_OUTPUT_DIR, fname)
     fig.savefig(path, dpi=150, bbox_inches="tight")
     plt.close(fig)

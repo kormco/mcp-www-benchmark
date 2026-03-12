@@ -26,6 +26,8 @@ SIM_DNS_HOST = "127.0.0.1"
 SIM_DNS_PORT = 5354
 SIM_HTTP_HOST = "127.0.0.1"
 SIM_HTTP_PORT = 8080
+SIM_MCP_HOST = "127.0.0.1"
+SIM_MCP_PORT = 8081  # Mock MCP server for browse_discover manifest fetch
 
 # Concurrency levels (same as real experiment)
 CONCURRENCY_LEVELS = [1, 10, 50, 100, 500]
