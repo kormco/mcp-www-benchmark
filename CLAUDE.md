@@ -4,10 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Scientific benchmark comparing three approaches for discovering MCP (Model Context Protocol) servers at scale:
+Scientific benchmark comparing two approaches for discovering MCP (Model Context Protocol) servers at scale:
 - **DNS-based** (`_mcp.{domain}` TXT records) — the mcp-www standard
 - **HTTP-based** (`https://{domain}/.well-known/mcp`) — hypothetical standard
-- **Website scraping** — parsing HTML for MCP references (worst-case baseline)
 
 Measures latency, throughput, bandwidth, and success rates across concurrency levels (1, 10, 50, 100, 500) and cache states (cold, warm).
 
@@ -39,7 +38,7 @@ No linting, tests, or type checking configured.
 
 **Three-layer design:**
 
-1. **Probers** (`src/dns_prober.py`, `src/http_prober.py`, `src/website_prober.py`) — async functions that execute a single query and return a `QueryResult`. Each uses `asyncio` with either `dnspython` or `httpx.AsyncClient`.
+1. **Probers** (`src/dns_prober.py`, `src/http_prober.py`) — async functions that execute a single query and return a `QueryResult`. Each uses `asyncio` with either `dnspython` or `httpx.AsyncClient`.
 
 2. **Orchestrator** (`src/runner.py`) — `run_batch()` runs all 201 domain queries at a given concurrency using `asyncio.Semaphore`. `run_experiment()` loops through the full test matrix, alternating method order between runs to control temporal effects. `src/metrics.py::MetricsCollector` samples system resources (CPU, memory, FDs, network) in a background thread during runs.
 

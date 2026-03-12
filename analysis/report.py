@@ -50,12 +50,11 @@ def generate_report():
     report.append("# MCP Discovery Benchmark Report\n")
     report.append("## Abstract\n")
     report.append(
-        "This experiment compares three approaches to discovering MCP (Model Context Protocol) "
-        "servers across a set of domains: (1) DNS TXT record lookup via the mcp-www standard, "
-        "(2) HTTP-based discovery via `/.well-known/mcp`, and (3) full website scraping with "
-        "HTML pattern matching. We measure latency, throughput, bandwidth, and success rates "
-        "across varying concurrency levels to determine which method scales best for large-scale "
-        "MCP server indexing.\n"
+        "This experiment compares two approaches to discovering MCP (Model Context Protocol) "
+        "servers across a set of domains: (1) DNS TXT record lookup via the mcp-www standard "
+        "and (2) HTTP-based discovery via `/.well-known/mcp`. We measure latency, throughput, "
+        "bandwidth, and success rates across varying concurrency levels to determine which "
+        "method scales best for large-scale MCP server indexing.\n"
     )
 
     # Methodology
@@ -120,7 +119,6 @@ def generate_report():
         "- DNS queries use UDP (connectionless) while HTTP requires TCP+TLS setup\n"
         "- Most domains do NOT have `_mcp` TXT records or `/.well-known/mcp` endpoints, "
         "so 'miss' latency dominates\n"
-        "- Website scraping downloads entire HTML pages, consuming significantly more bandwidth\n"
         "- DNS resolver caching and HTTP connection pooling affect warm-cache performance\n"
         "- Windows asyncio uses ProactorEventLoop which may affect UDP performance\n"
     )

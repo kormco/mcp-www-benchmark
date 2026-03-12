@@ -19,11 +19,10 @@ RUNS_PER_CONFIG = 3
 CACHE_STATES = ["cold", "warm"]
 
 # Discovery methods to compare
-METHODS = ["dns_mcp", "http_well_known", "website_scrape"]
+METHODS = ["dns_mcp", "http_well_known"]
 METHOD_LABELS = {
     "dns_mcp": "DNS-based (mcp-www)",
     "http_well_known": "HTTP MCP Discovery (/.well-known/mcp)",
-    "website_scrape": "Website Scraping (HTML parse)",
 }
 
 # HTTP discovery path

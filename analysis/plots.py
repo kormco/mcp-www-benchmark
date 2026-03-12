@@ -16,7 +16,6 @@ from analysis.stats import group_results
 COLORS = {
     "dns_mcp": "#2196F3",
     "http_well_known": "#FF9800",
-    "website_scrape": "#F44336",
 }
 
 

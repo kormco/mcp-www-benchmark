@@ -1,6 +1,6 @@
 """Experiment orchestrator.
 
-Runs the full test matrix: 3 methods x 5 concurrency levels x 2 cache states x N runs.
+Runs the full test matrix: 2 methods x 5 concurrency levels x 2 cache states x N runs.
 """
 
 import asyncio
@@ -19,7 +19,6 @@ from config import (
 from src.models import QueryResult, RunConfig
 from src.dns_prober import probe_dns, _make_resolver
 from src.http_prober import probe_http_well_known
-from src.website_prober import probe_website
 from src.cache_control import flush_dns_cache
 from src.metrics import MetricsCollector
 
@@ -52,13 +51,6 @@ async def run_batch(
             follow_redirects=True,
             max_redirects=3,
         )
-    elif config.method == "website_scrape":
-        client = httpx.AsyncClient(
-            timeout=QUERY_TIMEOUT,
-            follow_redirects=True,
-            max_redirects=5,
-            headers={"User-Agent": "MCP-Discovery-Benchmark/1.0"},
-        )
 
     async def probe_one(domain: str, category: str) -> QueryResult:
         async with semaphore:
@@ -69,11 +61,6 @@ async def run_batch(
                 )
             elif config.method == "http_well_known":
                 return await probe_http_well_known(
-                    domain, category, config.concurrency_level,
-                    config.cache_state, config.run_id, client,
-                )
-            elif config.method == "website_scrape":
-                return await probe_website(
                     domain, category, config.concurrency_level,
                     config.cache_state, config.run_id, client,
                 )
@@ -109,7 +96,7 @@ async def run_experiment(
 ):
     """Run the full experiment matrix."""
 
-    methods = methods or ["dns_mcp", "http_well_known", "website_scrape"]
+    methods = methods or ["dns_mcp", "http_well_known"]
     concurrency_levels = concurrency_levels or CONCURRENCY_LEVELS
     cache_states = cache_states or CACHE_STATES
     runs_per_config = runs_per_config or RUNS_PER_CONFIG

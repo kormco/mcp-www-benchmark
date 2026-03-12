@@ -22,7 +22,7 @@ discovery at any tested concurrency level.
 
 | Type | Variable | Values |
 |------|----------|--------|
-| Independent | Discovery method | DNS (mcp-www), HTTP (/.well-known/mcp), Website scraping |
+| Independent | Discovery method | DNS (mcp-www), HTTP (/.well-known/mcp) |
 | Independent | Concurrency level | 1, 10, 50, 100, 500 |
 | Independent | Cache state | Cold, Warm |
 | Dependent | Latency (p50, p95, p99) | ms |
@@ -46,9 +46,9 @@ discovery at any tested concurrency level.
 
 ### Test Matrix
 
-- 5 concurrency levels x 3 methods x 2 cache states = 30 configurations
-- 10 runs per configuration = 300 total runs
-- 1,000 domains per run = 300,000 individual measurements
+- 5 concurrency levels x 2 methods x 2 cache states = 20 configurations
+- 10 runs per configuration = 200 total runs
+- 1,000 domains per run = 200,000 individual measurements
 - Method order alternated between runs to control for temporal effects
 
 ### Statistical Analysis

@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from config import METHOD_LABELS, REPORT_DIR
+from config import METHOD_LABELS, METHODS, REPORT_DIR
 from src.models import QueryResult
 from analysis.stats import load_all_results, analyze_all, group_results, descriptive_stats
 
@@ -36,7 +36,9 @@ def load_jsonl_results(results_dir: str) -> list:
             for line in f:
                 line = line.strip()
                 if line:
-                    results.append(QueryResult.from_json(line))
+                    r = QueryResult.from_json(line)
+                    if r.method in METHODS:
+                        results.append(r)
     return results
 
 
@@ -165,7 +167,7 @@ def plot_method_comparison_current(results):
     """Latency CDF for current experiment, cold and warm."""
     groups = group_results(results)
     methods = sorted(set(k[0] for k in groups))
-    colors = {"dns_mcp": "#2196F3", "http_well_known": "#FF9800", "website_scrape": "#F44336"}
+    colors = {"dns_mcp": "#2196F3", "http_well_known": "#FF9800"}
 
     for cache_state in ["cold", "warm"]:
         concurrencies = sorted(set(k[1] for k in groups if k[2] == cache_state))
@@ -281,8 +283,8 @@ def generate_combined_report():
 
     report.append("# MCP Discovery Benchmark Report\n")
     report.append(
-        "This report presents results from three experiment runs comparing DNS-based, "
-        "HTTP-based, and website scraping approaches for discovering MCP (Model Context Protocol) servers.\n"
+        "This report presents results from three experiment runs comparing DNS-based "
+        "and HTTP-based approaches for discovering MCP (Model Context Protocol) servers.\n"
     )
 
     # ── Experiment Overview ──
@@ -291,7 +293,7 @@ def generate_combined_report():
     report.append("|---|---|---|---|")
     report.append("| **Platform** | Windows (win32) | Linux (Ubuntu) | Linux (Ubuntu) |")
     report.append("| **DNS Resolver** | Google 8.8.8.8:53 | Unbound on Synology NAS (LAN) | Local sim server (localhost) |")
-    report.append("| **Methods** | DNS, HTTP, Scrape | DNS, HTTP, Scrape | DNS, HTTP |")
+    report.append("| **Methods** | DNS, HTTP | DNS, HTTP | DNS, HTTP |")
     report.append("| **Concurrency** | 1, 10, 50 | 1, 10, 50, 100, 500 | 1, 10, 50, 100, 500 |")
     report.append("| **Cache States** | Cold only | Cold + Warm | Cold (injected) |")
     report.append(f"| **Total Queries** | {len(prior_results)} | {len(current_results)} | {len(sim_results)} |")
@@ -421,14 +423,12 @@ def generate_combined_report():
     report.append(f"1. **DNS is 30-540x faster than HTTP** depending on concurrency and cache state. "
                   f"At c=500 cold cache: DNS {current_dns_c500:.1f}ms vs HTTP {current_http_c500:.1f}ms ({current_http_c500/current_dns_c500:.0f}x).")
     report.append(f"2. **DNS scales with concurrency.** DNS maintains 100% success even at c=500. "
-                  f"HTTP/scrape plateau around 55% success due to timeouts.")
+                  f"HTTP plateaus around 55% success due to timeouts.")
     report.append(f"3. **Local recursive resolver eliminates rate limiting.** Moving from Google 8.8.8.8 "
                   f"to a local Unbound instance dropped DNS latency by ~50x and eliminated all timeouts.")
     report.append(f"4. **50% adoption doesn't change the story.** Even when half of domains have MCP servers, "
                   f"DNS remains ~{sim_http_c500/sim_dns_c500:.0f}x faster at c=500. "
                   f"DNS found {sim_dns_mcp_rate*100:.0f}% of MCP servers vs HTTP's {sim_http_mcp_rate*100:.0f}%.")
-    report.append(f"5. **HTTP and website scraping are statistically indistinguishable** in most comparisons "
-                  f"(p > 0.05 after Bonferroni correction), confirming that TCP+TLS overhead dominates.")
     report.append("")
 
     report.append("**H2 partially confirmed:** DNS latency increases with concurrency (0.9ms at c=1 to 58ms at c=500) "

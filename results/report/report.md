@@ -1,6 +1,6 @@
 # MCP Discovery Benchmark Report
 
-This report presents results from three experiment runs comparing DNS-based, HTTP-based, and website scraping approaches for discovering MCP (Model Context Protocol) servers.
+This report presents results from three experiment runs comparing DNS-based and HTTP-based approaches for discovering MCP (Model Context Protocol) servers.
 
 ## Experiment Overview
 
@@ -8,10 +8,10 @@ This report presents results from three experiment runs comparing DNS-based, HTT
 |---|---|---|---|
 | **Platform** | Windows (win32) | Linux (Ubuntu) | Linux (Ubuntu) |
 | **DNS Resolver** | Google 8.8.8.8:53 | Unbound on Synology NAS (LAN) | Local sim server (localhost) |
-| **Methods** | DNS, HTTP, Scrape | DNS, HTTP, Scrape | DNS, HTTP |
+| **Methods** | DNS, HTTP | DNS, HTTP | DNS, HTTP |
 | **Concurrency** | 1, 10, 50 | 1, 10, 50, 100, 500 | 1, 10, 50, 100, 500 |
 | **Cache States** | Cold only | Cold + Warm | Cold (injected) |
-| **Total Queries** | 1809 | 18090 | 6030 |
+| **Total Queries** | 1206 | 12060 | 6030 |
 | **MCP Adoption** | 1/201 domains (0.5%) | 1/201 domains (0.5%) | 100/201 domains (49.8%) |
 | **Runs/Config** | 1 | 3 | 3 |
 
@@ -27,9 +27,6 @@ Initial benchmark on Windows using Google's public DNS resolver (`8.8.8.8`). Onl
 | HTTP MCP Discovery (/.well-known/mcp) | c1 | cold | 302.2 | 3602.6 | 5603.0 | 55.2 | 6.0 | 1.4 |
 | HTTP MCP Discovery (/.well-known/mcp) | c10 | cold | 250.1 | 3044.6 | 5114.5 | 55.2 | 6.0 | 1.7 |
 | HTTP MCP Discovery (/.well-known/mcp) | c50 | cold | 314.8 | 3079.5 | 5221.9 | 55.2 | 6.0 | 1.5 |
-| Website Scraping (HTML parse) | c1 | cold | 249.9 | 5028.8 | 5270.8 | 54.2 | 1.0 | 1.4 |
-| Website Scraping (HTML parse) | c10 | cold | 267.3 | 3613.5 | 5300.7 | 54.2 | 1.0 | 1.4 |
-| Website Scraping (HTML parse) | c50 | cold | 585.8 | 3844.9 | 5569.3 | 54.2 | 1.0 | 1.0 |
 
 ## 2. Current Run (Linux + Local Unbound Resolver)
 
@@ -59,51 +56,21 @@ Full benchmark on Linux with a local Unbound recursive resolver running on a Syn
 | HTTP MCP Discovery (/.well-known/mcp) | c100 | warm | 1127.8 | 5002.7 | 6076.6 | 54.9 | 5.8 | 0.7 |
 | HTTP MCP Discovery (/.well-known/mcp) | c500 | cold | 1769.0 | 4140.8 | 7121.2 | 54.6 | 5.8 | 0.5 |
 | HTTP MCP Discovery (/.well-known/mcp) | c500 | warm | 2032.9 | 4687.7 | 7500.9 | 55.2 | 6.0 | 0.5 |
-| Website Scraping (HTML parse) | c1 | cold | 512.5 | 5010.4 | 6607.0 | 54.1 | 1.0 | 1.0 |
-| Website Scraping (HTML parse) | c1 | warm | 549.2 | 3653.3 | 5614.2 | 54.4 | 1.0 | 1.1 |
-| Website Scraping (HTML parse) | c10 | cold | 576.7 | 4915.7 | 5759.2 | 54.4 | 1.0 | 1.1 |
-| Website Scraping (HTML parse) | c10 | warm | 573.7 | 4838.1 | 5724.7 | 54.6 | 1.0 | 1.0 |
-| Website Scraping (HTML parse) | c50 | cold | 695.5 | 5003.2 | 5926.9 | 54.4 | 1.0 | 1.0 |
-| Website Scraping (HTML parse) | c50 | warm | 666.3 | 3844.8 | 5758.6 | 54.9 | 1.0 | 1.0 |
-| Website Scraping (HTML parse) | c100 | cold | 1165.6 | 5002.8 | 6432.7 | 54.4 | 1.0 | 0.7 |
-| Website Scraping (HTML parse) | c100 | warm | 1234.7 | 5004.0 | 6566.3 | 54.1 | 1.0 | 0.6 |
-| Website Scraping (HTML parse) | c500 | cold | 2192.0 | 5376.5 | 7680.1 | 54.4 | 1.0 | 0.4 |
-| Website Scraping (HTML parse) | c500 | warm | 2308.0 | 5434.4 | 7969.8 | 54.1 | 1.0 | 0.4 |
 
 ### Statistical Comparisons
 
 | Comparison | Concurrency | Cache | Median A (ms) | Median B (ms) | Speedup | p-value | Significant | Effect Size |
 |------------|-------------|-------|---------------|---------------|---------|---------|-------------|-------------|
 | dns_mcp vs http_well_known | 1 | cold | 0.9 | 465.9 | 539.35x | 1.51e-198 | Yes | -1.089 |
-| dns_mcp vs website_scrape | 1 | cold | 0.9 | 512.5 | 593.31x | 1.51e-198 | Yes | -1.025 |
-| http_well_known vs website_scrape | 1 | cold | 465.9 | 512.5 | 1.10x | 4.84e-01 | No | -0.083 |
 | dns_mcp vs http_well_known | 1 | warm | 0.9 | 446.2 | 475.92x | 1.51e-198 | Yes | -0.988 |
-| dns_mcp vs website_scrape | 1 | warm | 0.9 | 549.2 | 585.80x | 1.51e-198 | Yes | -1.108 |
-| http_well_known vs website_scrape | 1 | warm | 446.2 | 549.2 | 1.23x | 1.79e-02 | No | -0.076 |
 | dns_mcp vs http_well_known | 10 | cold | 4.6 | 499.6 | 108.05x | 1.51e-198 | Yes | -1.111 |
-| dns_mcp vs website_scrape | 10 | cold | 4.6 | 576.7 | 124.74x | 1.51e-198 | Yes | -1.067 |
-| http_well_known vs website_scrape | 10 | cold | 499.6 | 576.7 | 1.15x | 8.52e-01 | No | -0.054 |
 | dns_mcp vs http_well_known | 10 | warm | 4.7 | 536.9 | 113.77x | 1.51e-198 | Yes | -1.099 |
-| dns_mcp vs website_scrape | 10 | warm | 4.7 | 573.7 | 121.57x | 1.51e-198 | Yes | -1.147 |
-| http_well_known vs website_scrape | 10 | warm | 536.9 | 573.7 | 1.07x | 5.14e-01 | No | -0.031 |
 | dns_mcp vs http_well_known | 50 | cold | 21.9 | 600.1 | 27.43x | 1.51e-198 | Yes | -1.151 |
-| dns_mcp vs website_scrape | 50 | cold | 21.9 | 695.5 | 31.79x | 1.51e-198 | Yes | -1.162 |
-| http_well_known vs website_scrape | 50 | cold | 600.1 | 695.5 | 1.16x | 2.18e-02 | No | -0.109 |
 | dns_mcp vs http_well_known | 50 | warm | 20.1 | 598.5 | 29.75x | 1.51e-198 | Yes | -1.199 |
-| dns_mcp vs website_scrape | 50 | warm | 20.1 | 666.3 | 33.12x | 1.51e-198 | Yes | -1.217 |
-| http_well_known vs website_scrape | 50 | warm | 598.5 | 666.3 | 1.11x | 7.63e-02 | No | -0.068 |
 | dns_mcp vs http_well_known | 100 | cold | 32.3 | 1038.6 | 32.11x | 1.51e-198 | Yes | -1.506 |
-| dns_mcp vs website_scrape | 100 | cold | 32.3 | 1165.6 | 36.04x | 1.51e-198 | Yes | -1.524 |
-| http_well_known vs website_scrape | 100 | cold | 1038.6 | 1165.6 | 1.12x | 2.26e-02 | No | -0.111 |
 | dns_mcp vs http_well_known | 100 | warm | 33.1 | 1127.8 | 34.03x | 1.84e-198 | Yes | -1.613 |
-| dns_mcp vs website_scrape | 100 | warm | 33.1 | 1234.7 | 37.25x | 1.76e-198 | Yes | -1.579 |
-| http_well_known vs website_scrape | 100 | warm | 1127.8 | 1234.7 | 1.09x | 3.63e-02 | No | -0.109 |
 | dns_mcp vs http_well_known | 500 | cold | 58.1 | 1769.0 | 30.42x | 1.51e-198 | Yes | -1.910 |
-| dns_mcp vs website_scrape | 500 | cold | 58.1 | 2192.0 | 37.70x | 1.51e-198 | Yes | -1.981 |
-| http_well_known vs website_scrape | 500 | cold | 1769.0 | 2192.0 | 1.24x | 1.34e-08 | Yes | -0.274 |
 | dns_mcp vs http_well_known | 500 | warm | 54.4 | 2032.9 | 37.36x | 1.51e-198 | Yes | -2.052 |
-| dns_mcp vs website_scrape | 500 | warm | 54.4 | 2308.0 | 42.41x | 1.51e-198 | Yes | -2.052 |
-| http_well_known vs website_scrape | 500 | warm | 2032.9 | 2308.0 | 1.14x | 7.38e-06 | Yes | -0.246 |
 
 ### Charts
 
@@ -176,10 +143,9 @@ Simulated a world where 50% of domains (100/201) have MCP servers. Both DNS and 
 Key findings:
 
 1. **DNS is 30-540x faster than HTTP** depending on concurrency and cache state. At c=500 cold cache: DNS 58.1ms vs HTTP 1769.0ms (30x).
-2. **DNS scales with concurrency.** DNS maintains 100% success even at c=500. HTTP/scrape plateau around 55% success due to timeouts.
+2. **DNS scales with concurrency.** DNS maintains 100% success even at c=500. HTTP plateaus around 55% success due to timeouts.
 3. **Local recursive resolver eliminates rate limiting.** Moving from Google 8.8.8.8 to a local Unbound instance dropped DNS latency by ~50x and eliminated all timeouts.
 4. **50% adoption doesn't change the story.** Even when half of domains have MCP servers, DNS remains ~22x faster at c=500. DNS found 50% of MCP servers vs HTTP's 48%.
-5. **HTTP and website scraping are statistically indistinguishable** in most comparisons (p > 0.05 after Bonferroni correction), confirming that TCP+TLS overhead dominates.
 
 **H2 partially confirmed:** DNS latency increases with concurrency (0.9ms at c=1 to 58ms at c=500) but remains far below HTTP at all levels. The hypothesized resolver bottleneck did not materialize with a local Unbound instance.
 

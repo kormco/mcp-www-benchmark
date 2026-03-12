@@ -8,19 +8,21 @@ from typing import Dict, List, Tuple
 import numpy as np
 from scipy import stats
 
-from config import RAW_RESULTS_DIR, BOOTSTRAP_SAMPLES, CONFIDENCE_LEVEL, ALPHA
+from config import RAW_RESULTS_DIR, BOOTSTRAP_SAMPLES, CONFIDENCE_LEVEL, ALPHA, METHODS
 from src.models import QueryResult
 
 
 def load_all_results(results_dir: str = RAW_RESULTS_DIR) -> List[QueryResult]:
-    """Load all JSONL result files into a flat list."""
+    """Load all JSONL result files into a flat list, filtered to configured METHODS."""
     results = []
     for filepath in Path(results_dir).glob("*.jsonl"):
         with open(filepath) as f:
             for line in f:
                 line = line.strip()
                 if line:
-                    results.append(QueryResult.from_json(line))
+                    r = QueryResult.from_json(line)
+                    if r.method in METHODS:
+                        results.append(r)
     return results
 
 

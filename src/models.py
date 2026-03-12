@@ -9,7 +9,7 @@ import time
 @dataclass
 class QueryResult:
     """Result of a single discovery query."""
-    method: str                    # "dns_mcp", "http_well_known", "website_scrape"
+    method: str                    # "dns_mcp", "http_well_known"
     domain: str                    # Target domain
     category: str                  # Domain category: A, B, C, D, E
     concurrency_level: int         # Concurrency during this run
