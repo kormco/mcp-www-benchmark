@@ -299,7 +299,7 @@ def generate_combined_report():
     report.append("|-----------|-------|")
     report.append("| **Platform** | Linux (Ubuntu) |")
     report.append("| **Network** | Ethernet LAN |")
-    report.append("| **DNS Resolver** | Unbound (local recursive, `<local ip>:5335`) |")
+    report.append("| **DNS Resolver** | Unbound (Docker on Synology NAS, `<local ip>:5335`) |")
     report.append("| **Concurrency levels** | 1, 10, 50, 100, 500 |")
     report.append("| **Cache states** | Cold (resolver cache flushed), Warm (pre-populated) |")
     report.append(f"| **Domains** | 201 across 5 categories |")

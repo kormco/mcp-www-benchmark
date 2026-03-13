@@ -27,7 +27,7 @@ We test this with the real `mcp-www` npm package (not raw DNS), so latencies inc
 |-----------|-------|
 | **Platform** | Linux (Ubuntu) |
 | **Network** | Ethernet LAN |
-| **DNS Resolver** | Unbound (local recursive, `<local ip>:5335`) |
+| **DNS Resolver** | Unbound (Docker on Synology NAS, `<local ip>:5335`) |
 | **Concurrency levels** | 1, 10, 50, 100, 500 |
 | **Cache states** | Cold (resolver cache flushed), Warm (pre-populated) |
 | **Domains** | 201 across 5 categories |
