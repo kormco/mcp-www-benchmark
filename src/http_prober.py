@@ -43,7 +43,22 @@ async def probe_http_well_known(
         t_end = time.perf_counter()
 
         body = response.content
-        mcp_found = response.status_code == 200 and len(body) > 0
+        content_type = response.headers.get("content-type", "")
+
+        # Validate that the response is actually MCP content, not a catch-all
+        # HTML page. A real .well-known/mcp response should be JSON.
+        mcp_found = False
+        if response.status_code == 200 and len(body) > 0:
+            if "json" in content_type:
+                try:
+                    import json
+                    data = json.loads(body)
+                    # Must be a dict/object with at least one MCP-relevant key
+                    mcp_found = isinstance(data, dict) and bool(
+                        set(data.keys()) & {"capabilities", "serverInfo", "tools", "resources", "prompts", "protocolVersion"}
+                    )
+                except (json.JSONDecodeError, UnicodeDecodeError):
+                    pass
 
         # Approximate bytes: request line + headers
         request_size = len(f"GET {HTTP_WELL_KNOWN_PATH} HTTP/2\r\nHost: {domain}\r\n\r\n")

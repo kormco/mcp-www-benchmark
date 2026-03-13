@@ -69,7 +69,18 @@ async def probe_sim_http(
         t_end = time.perf_counter()
 
         body = response.content
-        mcp_found = response.status_code == 200 and len(body) > 0
+        content_type = response.headers.get("content-type", "")
+
+        mcp_found = False
+        if response.status_code == 200 and len(body) > 0:
+            if "json" in content_type:
+                try:
+                    data = json.loads(body)
+                    mcp_found = isinstance(data, dict) and bool(
+                        set(data.keys()) & {"capabilities", "serverInfo", "tools", "resources", "prompts", "protocolVersion"}
+                    )
+                except (json.JSONDecodeError, UnicodeDecodeError):
+                    pass
 
         request_size = len(f"GET /.well-known/mcp HTTP/1.1\r\nHost: {domain}\r\n\r\n")
 

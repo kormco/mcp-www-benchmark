@@ -47,38 +47,38 @@ Only 1 of 201 domains (0.5%) has an MCP server. This reflects current real-world
 
 ## Results
 
-**mcp-www is 961x faster at low concurrency and 88x faster at high concurrency, with 100% success vs ~55% for HTTP.**
+**mcp-www is 919x faster at low concurrency and 106x faster at high concurrency, with 100% success vs ~55% for HTTP.**
 
 ### Latency Comparison
 
 | Method | Concurrency | Cache | Median (ms) | P95 (ms) | P99 (ms) | Success % | MCP Found % | Throughput (q/s) |
 |--------|-------------|-------|-------------|----------|----------|-----------|-------------|------------------|
-| HTTP (/.well-known/mcp) | c1 | cold | 429.7 | 3158.7 | 5345.4 | 54.7 | 5.6 | 1.3 |
-| HTTP (/.well-known/mcp) | c1 | warm | 405.1 | 2105.4 | 5384.9 | 55.4 | 6.0 | 1.4 |
-| HTTP (/.well-known/mcp) | c10 | cold | 471.1 | 3051.7 | 5362.7 | 55.2 | 6.0 | 1.3 |
-| HTTP (/.well-known/mcp) | c10 | warm | 426.8 | 2388.9 | 5321.6 | 55.7 | 6.0 | 1.4 |
-| HTTP (/.well-known/mcp) | c50 | cold | 488.6 | 3188.8 | 5380.1 | 55.2 | 6.0 | 1.2 |
-| HTTP (/.well-known/mcp) | c50 | warm | 423.3 | 2110.0 | 5247.1 | 55.7 | 6.0 | 1.4 |
-| HTTP (/.well-known/mcp) | c100 | cold | 805.5 | 3294.9 | 5783.9 | 54.7 | 5.5 | 0.9 |
-| HTTP (/.well-known/mcp) | c100 | warm | 721.6 | 2893.2 | 5638.4 | 55.6 | 6.0 | 1.0 |
-| HTTP (/.well-known/mcp) | c500 | cold | 1457.0 | 3573.0 | 6849.0 | 55.2 | 6.0 | 0.6 |
-| HTTP (/.well-known/mcp) | c500 | warm | 1304.3 | 3353.7 | 6368.7 | 55.7 | 6.0 | 0.7 |
-| mcp-www (browse_discover) | c1 | cold | 0.4 | 2.3 | 3.9 | 100.0 | 0.5 | 348.8 |
-| mcp-www (browse_discover) | c1 | warm | 0.4 | 2.1 | 5.3 | 100.0 | 0.5 | 575.2 |
-| mcp-www (browse_discover) | c10 | cold | 1.2 | 2.0 | 2.7 | 100.0 | 0.5 | 296.4 |
-| mcp-www (browse_discover) | c10 | warm | 0.9 | 1.7 | 2.9 | 100.0 | 0.5 | 407.3 |
-| mcp-www (browse_discover) | c50 | cold | 5.1 | 6.8 | 7.1 | 100.0 | 0.5 | 152.2 |
-| mcp-www (browse_discover) | c50 | warm | 4.1 | 5.5 | 5.6 | 100.0 | 0.5 | 162.0 |
-| mcp-www (browse_discover) | c100 | cold | 8.6 | 11.0 | 11.1 | 100.0 | 0.5 | 93.6 |
-| mcp-www (browse_discover) | c100 | warm | 7.0 | 9.4 | 9.7 | 100.0 | 0.5 | 122.7 |
-| mcp-www (browse_discover) | c500 | cold | 16.6 | 18.3 | 18.3 | 100.0 | 0.5 | 57.8 |
-| mcp-www (browse_discover) | c500 | warm | 13.9 | 15.2 | 15.4 | 100.0 | 0.5 | 70.5 |
+| HTTP (/.well-known/mcp) | c1 | cold | 476.9 | 3627.9 | 5363.1 | 55.1 | 0.0 | 1.1 |
+| HTTP (/.well-known/mcp) | c1 | warm | 445.1 | 3059.9 | 5373.3 | 55.4 | 0.0 | 1.2 |
+| HTTP (/.well-known/mcp) | c10 | cold | 479.8 | 3011.4 | 5336.1 | 55.2 | 0.0 | 1.2 |
+| HTTP (/.well-known/mcp) | c10 | warm | 497.1 | 3663.7 | 5333.5 | 54.9 | 0.0 | 1.2 |
+| HTTP (/.well-known/mcp) | c50 | cold | 552.1 | 3420.1 | 5387.7 | 55.2 | 0.0 | 1.1 |
+| HTTP (/.well-known/mcp) | c50 | warm | 535.6 | 3632.6 | 5384.2 | 55.4 | 0.0 | 1.1 |
+| HTTP (/.well-known/mcp) | c100 | cold | 1081.9 | 3917.3 | 6127.5 | 55.4 | 0.0 | 0.7 |
+| HTTP (/.well-known/mcp) | c100 | warm | 1197.1 | 4595.2 | 6364.0 | 55.2 | 0.0 | 0.7 |
+| HTTP (/.well-known/mcp) | c500 | cold | 1874.9 | 4060.0 | 7001.2 | 55.2 | 0.0 | 0.5 |
+| HTTP (/.well-known/mcp) | c500 | warm | 1797.9 | 4149.5 | 7063.5 | 54.9 | 0.0 | 0.5 |
+| mcp-www (browse_discover) | c1 | cold | 0.5 | 1.2 | 5.8 | 100.0 | 0.5 | 376.9 |
+| mcp-www (browse_discover) | c1 | warm | 0.5 | 0.9 | 6.1 | 100.0 | 0.5 | 505.5 |
+| mcp-www (browse_discover) | c10 | cold | 1.2 | 3.4 | 6.9 | 100.0 | 0.5 | 292.9 |
+| mcp-www (browse_discover) | c10 | warm | 0.9 | 1.6 | 1.9 | 100.0 | 0.5 | 430.0 |
+| mcp-www (browse_discover) | c50 | cold | 5.1 | 7.5 | 7.9 | 100.0 | 0.5 | 144.5 |
+| mcp-www (browse_discover) | c50 | warm | 4.3 | 5.9 | 6.0 | 100.0 | 0.5 | 177.7 |
+| mcp-www (browse_discover) | c100 | cold | 8.3 | 12.5 | 12.9 | 100.0 | 0.5 | 94.8 |
+| mcp-www (browse_discover) | c100 | warm | 7.2 | 11.6 | 12.3 | 100.0 | 0.5 | 114.9 |
+| mcp-www (browse_discover) | c500 | cold | 17.7 | 18.4 | 19.5 | 100.0 | 0.5 | 54.5 |
+| mcp-www (browse_discover) | c500 | warm | 13.5 | 17.0 | 17.1 | 100.0 | 0.5 | 70.7 |
 
 ## Analysis
 
 ### 1. Latency: Orders-of-magnitude difference
 
-At c=1 with a cold cache, mcp-www returns a median response in **0.4ms** vs **429.7ms** for HTTP (961x faster). The gap persists at scale: at c=500, mcp-www stays at **16.6ms** median while HTTP degrades to **1457.0ms**.
+At c=1 with a cold cache, mcp-www returns a median response in **0.5ms** vs **476.9ms** for HTTP (919x faster). The gap persists at scale: at c=500, mcp-www stays at **17.7ms** median while HTTP degrades to **1874.9ms**.
 
 The CDF plots show the distributions barely overlap. HTTP latency has a long tail extending past 5 seconds (the timeout), while mcp-www latency is tightly clustered in the single-digit millisecond range.
 
@@ -94,7 +94,7 @@ This is the critical difference for an indexer use case. A discovery system that
 
 ### 3. Throughput: DNS scales, HTTP degrades
 
-At c=1, mcp-www sustains **349 q/s** vs HTTP's **1.3 q/s** — a **270x** difference. As concurrency increases, HTTP throughput remains flat or *decreases* (to 0.6 q/s at c=500) because timeouts and connection failures consume more wall-clock time. mcp-www throughput also decreases with concurrency (58 q/s at c=500) due to the single-process architecture, but remains dramatically higher throughout.
+At c=1, mcp-www sustains **377 q/s** vs HTTP's **1.1 q/s** — a **344x** difference. As concurrency increases, HTTP throughput remains flat or *decreases* (to 0.5 q/s at c=500) because timeouts and connection failures consume more wall-clock time. mcp-www throughput also decreases with concurrency (55 q/s at c=500) due to the single-process architecture, but remains dramatically higher throughout.
 
 ![Throughput Cold](throughput_cold.png)
 
@@ -102,7 +102,7 @@ At c=1, mcp-www sustains **349 q/s** vs HTTP's **1.3 q/s** — a **270x** differ
 
 ### 4. Cache effects: Minimal for DNS, marginal for HTTP
 
-Warming the DNS resolver cache provides a modest 1.1x improvement for mcp-www (0.4ms -> 0.4ms at c=1). HTTP sees a similar marginal gain (1.1x). This suggests DNS latency is already dominated by local resolver performance rather than upstream lookups, while HTTP latency is dominated by the TLS/TCP overhead to each origin server, which caching doesn't help.
+Warming the DNS resolver cache provides a modest 1.1x improvement for mcp-www (0.5ms -> 0.5ms at c=1). HTTP sees a similar marginal gain (1.1x). This suggests DNS latency is already dominated by local resolver performance rather than upstream lookups, while HTTP latency is dominated by the TLS/TCP overhead to each origin server, which caching doesn't help.
 
 ### 5. Statistical significance
 
@@ -110,16 +110,16 @@ All comparisons are statistically significant (p < 0.001 after Bonferroni correc
 
 | Comparison | Concurrency | Cache | Median A (ms) | Median B (ms) | Speedup | p-value | Significant | Effect Size |
 |------------|-------------|-------|---------------|---------------|---------|---------|-------------|-------------|
-| http_well_known vs mcp_www | 1 | cold | 429.7 | 0.4 | 0.00x | 6.86e-197 | Yes | 1.021 |
-| http_well_known vs mcp_www | 1 | warm | 405.1 | 0.4 | 0.00x | 7.61e-198 | Yes | 0.992 |
-| http_well_known vs mcp_www | 10 | cold | 471.1 | 1.2 | 0.00x | 5.04e-197 | Yes | 1.048 |
-| http_well_known vs mcp_www | 10 | warm | 426.8 | 0.9 | 0.00x | 1.36e-197 | Yes | 1.027 |
-| http_well_known vs mcp_www | 50 | cold | 488.6 | 5.1 | 0.01x | 3.01e-197 | Yes | 1.070 |
-| http_well_known vs mcp_www | 50 | warm | 423.3 | 4.1 | 0.01x | 1.32e-196 | Yes | 1.038 |
-| http_well_known vs mcp_www | 100 | cold | 805.5 | 8.6 | 0.01x | 1.64e-197 | Yes | 1.372 |
-| http_well_known vs mcp_www | 100 | warm | 721.6 | 7.0 | 0.01x | 3.97e-198 | Yes | 1.331 |
-| http_well_known vs mcp_www | 500 | cold | 1457.0 | 16.6 | 0.01x | 2.13e-198 | Yes | 1.793 |
-| http_well_known vs mcp_www | 500 | warm | 1304.3 | 13.9 | 0.01x | 2.29e-198 | Yes | 1.832 |
+| http_well_known vs mcp_www | 1 | cold | 476.9 | 0.5 | 0.00x | 3.92e-197 | Yes | 1.131 |
+| http_well_known vs mcp_www | 1 | warm | 445.1 | 0.5 | 0.00x | 1.04e-197 | Yes | 1.091 |
+| http_well_known vs mcp_www | 10 | cold | 479.8 | 1.2 | 0.00x | 4.05e-197 | Yes | 1.070 |
+| http_well_known vs mcp_www | 10 | warm | 497.1 | 0.9 | 0.00x | 8.53e-198 | Yes | 1.065 |
+| http_well_known vs mcp_www | 50 | cold | 552.1 | 5.1 | 0.01x | 2.61e-197 | Yes | 1.111 |
+| http_well_known vs mcp_www | 50 | warm | 535.6 | 4.3 | 0.01x | 6.15e-198 | Yes | 1.123 |
+| http_well_known vs mcp_www | 100 | cold | 1081.9 | 8.3 | 0.01x | 4.47e-198 | Yes | 1.623 |
+| http_well_known vs mcp_www | 100 | warm | 1197.1 | 7.2 | 0.01x | 1.98e-198 | Yes | 1.670 |
+| http_well_known vs mcp_www | 500 | cold | 1874.9 | 17.7 | 0.01x | 2.25e-198 | Yes | 2.009 |
+| http_well_known vs mcp_www | 500 | warm | 1797.9 | 13.5 | 0.01x | 1.73e-198 | Yes | 2.024 |
 
 ## What if 50% of domains had MCP servers?
 
@@ -131,22 +131,22 @@ This changes the workload significantly: instead of mostly returning "not found,
 
 | Method | Concurrency | Cache | Median (ms) | P95 (ms) | P99 (ms) | Success % | MCP Found % | Throughput (q/s) |
 |--------|-------------|-------|-------------|----------|----------|-----------|-------------|------------------|
-| HTTP (/.well-known/mcp) | c1 | cold | 591.6 | 3438.1 | 5027.2 | 96.5 | 48.6 | 1.0 |
-| HTTP (/.well-known/mcp) | c10 | cold | 644.9 | 3426.8 | 5004.4 | 96.2 | 48.4 | 1.0 |
-| HTTP (/.well-known/mcp) | c50 | cold | 653.6 | 3131.7 | 5015.1 | 96.4 | 48.1 | 1.0 |
-| HTTP (/.well-known/mcp) | c100 | cold | 699.3 | 4008.1 | 5070.6 | 96.2 | 47.8 | 0.9 |
-| HTTP (/.well-known/mcp) | c500 | cold | 1254.4 | 3463.2 | 5668.4 | 97.5 | 49.1 | 0.7 |
-| mcp-www (browse_discover) | c1 | cold | 8.0 | 22.1 | 30.9 | 100.0 | 50.2 | 89.5 |
-| mcp-www (browse_discover) | c10 | cold | 7.4 | 20.0 | 22.3 | 100.0 | 50.2 | 87.7 |
-| mcp-www (browse_discover) | c50 | cold | 27.7 | 64.3 | 86.1 | 100.0 | 50.2 | 31.1 |
-| mcp-www (browse_discover) | c100 | cold | 46.5 | 107.1 | 120.5 | 100.0 | 50.2 | 18.7 |
-| mcp-www (browse_discover) | c500 | cold | 69.0 | 169.7 | 181.5 | 100.0 | 50.2 | 12.9 |
+| HTTP (/.well-known/mcp) | c1 | cold | 672.5 | 5006.2 | 5009.1 | 94.5 | 46.6 | 0.9 |
+| HTTP (/.well-known/mcp) | c10 | cold | 680.5 | 3935.4 | 5004.7 | 95.9 | 47.9 | 0.9 |
+| HTTP (/.well-known/mcp) | c50 | cold | 731.9 | 3406.2 | 5013.3 | 96.5 | 48.6 | 0.9 |
+| HTTP (/.well-known/mcp) | c100 | cold | 735.0 | 4008.4 | 5095.7 | 95.5 | 47.4 | 0.8 |
+| HTTP (/.well-known/mcp) | c500 | cold | 1446.9 | 4111.4 | 6115.8 | 96.2 | 47.8 | 0.6 |
+| mcp-www (browse_discover) | c1 | cold | 10.1 | 28.0 | 33.7 | 100.0 | 50.2 | 77.8 |
+| mcp-www (browse_discover) | c10 | cold | 8.5 | 21.6 | 26.7 | 100.0 | 50.2 | 79.6 |
+| mcp-www (browse_discover) | c50 | cold | 29.2 | 63.3 | 74.7 | 100.0 | 50.2 | 30.5 |
+| mcp-www (browse_discover) | c100 | cold | 51.0 | 109.9 | 122.8 | 100.0 | 50.2 | 17.8 |
+| mcp-www (browse_discover) | c500 | cold | 74.0 | 150.3 | 166.5 | 100.0 | 50.2 | 13.2 |
 
 ### Simulation Analysis
 
-Even with 50% adoption, mcp-www remains **74x faster** at c=1 (8.0ms vs 591.6ms) and **18x faster** at c=500 (69.0ms vs 1254.4ms).
+Even with 50% adoption, mcp-www remains **67x faster** at c=1 (10.1ms vs 672.5ms) and **20x faster** at c=500 (74.0ms vs 1446.9ms).
 
-mcp-www latency increases from 0.4ms (real) to 8.0ms (sim) at c=1 because half the queries now require a manifest fetch in addition to the DNS lookup. Despite the extra work, mcp-www still completes with **100% success** vs **98%** for HTTP at c=500.
+mcp-www latency increases from 0.5ms (real) to 10.1ms (sim) at c=1 because half the queries now require a manifest fetch in addition to the DNS lookup. Despite the extra work, mcp-www still completes with **100% success** vs **96%** for HTTP at c=500.
 
 The MCP Found rate converges to the expected ~50% for both methods, confirming the simulation is working correctly.
 
@@ -154,11 +154,11 @@ The MCP Found rate converges to the expected ~50% for both methods, confirming t
 
 | Comparison | Concurrency | Cache | Median A (ms) | Median B (ms) | Speedup | p-value | Significant | Effect Size |
 |------------|-------------|-------|---------------|---------------|---------|---------|-------------|-------------|
-| http_well_known vs mcp_www | 1 | cold | 591.6 | 8.0 | 0.01x | 1.44e-197 | Yes | 1.236 |
-| http_well_known vs mcp_www | 10 | cold | 644.9 | 7.4 | 0.01x | 4.32e-197 | Yes | 1.292 |
-| http_well_known vs mcp_www | 50 | cold | 653.6 | 27.7 | 0.04x | 1.28e-197 | Yes | 1.314 |
-| http_well_known vs mcp_www | 100 | cold | 699.3 | 46.5 | 0.07x | 9.60e-197 | Yes | 1.285 |
-| http_well_known vs mcp_www | 500 | cold | 1254.4 | 69.0 | 0.05x | 4.41e-198 | Yes | 1.702 |
+| http_well_known vs mcp_www | 1 | cold | 672.5 | 10.1 | 0.02x | 1.49e-197 | Yes | 1.332 |
+| http_well_known vs mcp_www | 10 | cold | 680.5 | 8.5 | 0.01x | 2.73e-197 | Yes | 1.375 |
+| http_well_known vs mcp_www | 50 | cold | 731.9 | 29.2 | 0.04x | 1.25e-197 | Yes | 1.438 |
+| http_well_known vs mcp_www | 100 | cold | 735.0 | 51.0 | 0.07x | 1.60e-197 | Yes | 1.386 |
+| http_well_known vs mcp_www | 500 | cold | 1446.9 | 74.0 | 0.05x | 4.23e-198 | Yes | 1.794 |
 
 ![Latency Cdf Cold 50Pct Adoption Sim](latency_cdf_cold_50pct_adoption_sim.png)
 
@@ -195,7 +195,7 @@ DNS handles all of these cases with NXDOMAIN or SERVFAIL, which are fast, defini
 
 ## Conclusion
 
-DNS-based discovery via mcp-www is **961x faster** (median) and **100% reliable** compared to HTTP-based discovery at `/.well-known/mcp`, which achieves only ~55% success. The advantage holds across all concurrency levels (1 to 500), both cache states, and in a simulated 50% adoption scenario.
+DNS-based discovery via mcp-www is **919x faster** (median) and **100% reliable** compared to HTTP-based discovery at `/.well-known/mcp`, which achieves only ~55% success. The advantage holds across all concurrency levels (1 to 500), both cache states, and in a simulated 50% adoption scenario.
 
 For an MCP indexer scanning thousands of domains, DNS-based discovery is not just faster — it's a fundamentally different reliability profile. DNS provides a definitive answer (record exists or NXDOMAIN) without depending on the target's web server availability, TLS configuration, or endpoint support. HTTP discovery inherits all the fragility of making HTTPS connections to arbitrary domains across the internet.
 

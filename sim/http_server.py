@@ -46,12 +46,9 @@ class SimHTTPServer:
 
         if host in self.config.mcp_enabled:
             body = {
-                "mcp": {
-                    "version": "1.0",
-                    "server": f"https://mcp.{host}",
-                    "auth": "none",
-                    "capabilities": ["tools", "resources"],
-                }
+                "protocolVersion": "2024-11-05",
+                "capabilities": {"tools": {}, "resources": {}},
+                "serverInfo": {"name": f"mcp-{host}", "version": "1.0.0"},
             }
             return web.json_response(body, status=200)
         else:
